@@ -7,10 +7,71 @@
 
     <!-- sample text -->
     <body>
-        
+
     </body>
 
     <script>
+        const options = ['rock', 'paper', 'scissors'];
+        
+        function computerPlay() {
+            const number = Math.floor(Math.random()*options.length);
+            return options[number];
+        }
+        //doesn't work
+        // function winValue() {
+        //     let arrayElementWin;
+        //     let i;
+            
+        //     if (i > 0) {
+        //         arrayElementWin = (i + 2) - 3;
+        //     } else arrayElementWin = i + 2;
+        //     return arrayElementWin;
+        // }       
+        // doesn't work
+        // function loseValue() {
+        //     let arrayElementlose;
+        //     let i;
+
+        //     if (i > 1) {
+        //         arrayElementlose = (i + 1) - 3;
+        //     } else arrayElementlose = i + 1;
+        //     return arrayElementlose;
+        // } 
+            
+
+        function playRound(playerSelection, computerSelection) {
+            let message = "";
+            
+            // pattern draw, lose, win. make loop defining based on pattern
+            // make value of 'x' in for loop line up with pattern
+            // Function for win value and function for lose value
+            
+
+            for (i = 0; i < options.length; i++) {
+
+                if (playerSelection === options[i] && computerSelection === options [i]) {
+                    message = `It's a draw. You both selected ${playerSelection}.`
+                } else if (playerSelection === options[i] && computerSelection === options [i + 1]) {
+                    message = `You lose! ${computerSelection} beats ${playerSelection}.`;
+                } else if (playerSelection === options[i] && computerSelection === options [i + 1]) {
+                    message = `You win! ${playerSelection} beats ${computerSelection}.`;
+                } else continue; 
+                return message;   
+            } 
+
+            // if (playerSelection === 'rock') {
+            //     message = "yolo";
+            // } else {
+            //     message = `It's a Draw. You both selected ${playerSelection}`;
+            // }
+            // return message;
+        }
+
+        const computerSelection = computerPlay();
+        console.log(computerSelection);
+        const playerSelection = 'paper';
+        console.log(playerSelection);
+        console.log(playRound(playerSelection, computerSelection));
 
     </script>
 
