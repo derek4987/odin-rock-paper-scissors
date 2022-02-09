@@ -17,40 +17,31 @@
             const number = Math.floor(Math.random()*options.length);
             return options[number];
         }
-            
         function playRound(playerSelection, computerSelection) {
             let message = "";
             
             // pattern draw, lose, win. make loop defining based on pattern
-            // make value of 'x' in for loop line up with pattern
+            // make value of 'x' in for loop line up with pattern remainder of array length %options.length
             // Function for win value and function for lose value
             
-
             for (i = 0; i < options.length; i++) {
 
                 if (playerSelection === options[i] && computerSelection === options [i]) {
                     message = `It's a draw. You both selected ${playerSelection}.`
-                } else if (playerSelection === options[i] && computerSelection === options [(i + 1)%3]) {
+                } else if (playerSelection === options[i] && computerSelection === options [(i + 1)%options.length]) {
                     message = `You lose! ${computerSelection} beats ${playerSelection}.`;
-                } else if (playerSelection === options[i] && computerSelection === options [(i + 2)%3]) {
+                } else if (playerSelection === options[i] && computerSelection === options [(i + 2)%options.length]) {
                     message = `You win! ${playerSelection} beats ${computerSelection}.`;
                 } else continue; 
                 return message;   
-            } 
-
-            // if (playerSelection === 'rock') {
-            //     message = "yolo";
-            // } else {
-            //     message = `It's a Draw. You both selected ${playerSelection}`;
-            // }
-            // return message;
+            }    
         }
 
         const computerSelection = computerPlay();
         console.log(computerSelection);
-        const playerSelection = 'paper';
+        const playerSelection = 'scissors';
         console.log(playerSelection);
-        console.log(playRound(playerSelection, computerSelection));
+        console.log(playRound(playerSelection.toLowerCase(), computerSelection));
 
     </script>
 
