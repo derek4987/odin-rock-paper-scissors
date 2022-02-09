@@ -12,6 +12,8 @@
 
     <script>
         const options = ['rock', 'paper', 'scissors'];
+        let playerscore = 0;
+        let computerScore = 0;
         
         function computerPlay() {
             const number = Math.floor(Math.random()*options.length);
@@ -24,24 +26,34 @@
             // make value of 'x' in for loop line up with pattern remainder of array length %options.length
             // Function for win value and function for lose value
             
-            for (i = 0; i < options.length; i++) {
+            for (let i = 0; i < options.length; i++) {
 
                 if (playerSelection === options[i] && computerSelection === options [i]) {
-                    message = `It's a draw. You both selected ${playerSelection}.`
+                    message = `It's a draw. You both selected ${playerSelection}.`;
                 } else if (playerSelection === options[i] && computerSelection === options [(i + 1)%options.length]) {
                     message = `You lose! ${computerSelection} beats ${playerSelection}.`;
                 } else if (playerSelection === options[i] && computerSelection === options [(i + 2)%options.length]) {
                     message = `You win! ${playerSelection} beats ${computerSelection}.`;
                 } else continue; 
-                return message;   
+                return message; 
             }    
         }
 
-        const computerSelection = computerPlay();
-        console.log(computerSelection);
-        const playerSelection = 'scissors';
-        console.log(playerSelection);
-        console.log(playRound(playerSelection.toLowerCase(), computerSelection));
+        function game() {
+            for (let i = 0; i <5; i++) {
+                const input = prompt('Rock, Paper, or Scissors');
+                const playerSelection = input.toLowerCase();
+                const computerSelection = computerPlay();
+                console.log(playRound(playerSelection, computerSelection));
+            }
+        }
+
+        game();
+        // const computerSelection = computerPlay();
+        // console.log(computerSelection);
+        // const playerSelection = 'scissors';
+        // console.log(playerSelection);
+        // console.log(playRound(playerSelection.toLowerCase(), computerSelection));
 
     </script>
 
