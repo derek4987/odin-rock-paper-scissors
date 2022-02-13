@@ -7,16 +7,20 @@
     </head>
     
     <body>
-        <div>
-            <div>Your Score: <span class="yourScore"></span>0</div>
-            <div>Computer Score: <span class="computerScore">0</span></div>
+        <div class="gameBox">
+            <div class="title">Rock, Paper, Scissors</div>
+            <div class="scores">
+                <div class="score">Your Score: <span class="yourScore">0</span></div>
+                <div class="score">Computer Score: <span class="computerScore">0</span></div>
+            </div>
+            <div class="result">Choose an Option</div>
+            <div class="rps">
+                <button onclick="playRound(options[0],computerPlay())">Rock</button>
+                <button onclick="playRound(options[1],computerPlay())">Paper</button>
+                <button onclick="playRound(options[2],computerPlay())">Scissors</button>
+            </div>
+            <div class="newGame"><button onclick="newGame()">New Game</button></div>
         </div>
-        <div>
-            <button>Rock</button>
-            <button>Paper</button>
-            <button>Scissors</button>
-        </div>
-        <div class="result"></div>
 
 
     </body>
@@ -25,59 +29,59 @@
         const options = ['rock', 'paper', 'scissors'];
         let playerScore = 0;
         let computerScore = 0;
+        let message = "";
 
         function computerPlay() {
             const number = Math.floor(Math.random()*options.length);
             return options[number];
         }
         function playRound(playerSelection, computerSelection) {
-            let message = "";
             
             // pattern draw, lose, win. make loop defining based on pattern
             // make value of 'x' in for loop line up with pattern remainder of array length %options.length
             // Function for win value and function for lose value
-            
-            for (let i = 0; i < options.length; i++) {
+            if (playerScore <5 && computerScore < 5) {
+                for (let i = 0; i < options.length; i++) {
 
-                if (playerSelection === options[i] && computerSelection === options [i]) {
-                    message = `It's a draw. You both selected ${playerSelection}.`;
-                } else if (playerSelection === options[i] && computerSelection === options [(i + 1)%options.length]) {
-                    message = `You lose! ${computerSelection} beats ${playerSelection}.`;
-                    computerScore +=1;
-                    document.querySelector('.computerScore').innerHTML = computerScore;
-                } else if (playerSelection === options[i] && computerSelection === options [(i + 2)%options.length]) {
-                    message = `You win! ${playerSelection} beats ${computerSelection}.`;
-                    playerScore +=1;
-                    document.querySelector('.yourScore').innerHTML = playerScore; 
-                } else continue; 
-                return message; 
-            }    
+                    if (playerSelection === options[i] && computerSelection === options [i]) {
+                        message = `It's a draw. You both selected ${playerSelection}.`;
+                        document.querySelector('.result').textContent = message;
+                    } else if (playerSelection === options[i] && computerSelection === options [(i + 1)%options.length]) {
+                        message = `You lose! ${computerSelection} beats ${playerSelection}.`;
+                        computerScore +=1;
+                        gameOver();
+                        document.querySelector('.computerScore').innerHTML = `${computerScore}`;
+                        document.querySelector('.result').textContent = message;
+                    } else if (playerSelection === options[i] && computerSelection === options [(i + 2)%options.length]) {
+                        message = `You win! ${playerSelection} beats ${computerSelection}.`;
+                        playerScore +=1;
+                        gameOver();
+                        document.querySelector('.yourScore').innerHTML = `${playerScore}`; 
+                        document.querySelector('.result').textContent = message;
+                    } else continue; 
+                    return message; 
+                }
+            } else return;    
         }
 
-        function game() {
-                const input = prompt('Rock, Paper, or Scissors');
-                const playerSelection = input.toLowerCase();
-                const computerSelection = computerPlay();
-                console.log(playRound(playerSelection, computerSelection));
-                console.log(`Your score: ${playerScore}. Computer score: ${computerScore}`);
-
-            if (playerScore > computerScore) {
-                console.log(`You win! Your score: ${playerScore}  Computer score: ${computerScore}`);
-            } else if (playerScore < computerScore) {
-                console.log(`You lose. Your score: ${playerScore}  Computer score: ${computerScore}`);
-            } else {
-                console.log(`It's a draw. final score is ${playerScore} to ${computerScore}`);
-            }
+        function gameOver() {
+            if (playerScore === 5) {
+                message = `You win! The final score is ${playerScore}-${computerScore}`;
+            } else if (computerScore === 5) {
+                message = `You lose. The final score is ${playerScore}-${computerScore}`;
+            } else return;
+            return message;
         }
 
         function newGame() {
             playerScore = 0;
             computerScore = 0;
-            game();
+            message = "Choose an Option";
+            document.querySelector('.yourScore').innerHTML = '0';
+            document.querySelector('.computerScore').innerHTML = '0';
+            document.querySelector('.result').textContent = message;
         }
-
-        game();
-
+        
     </script>
 
 </html>  
